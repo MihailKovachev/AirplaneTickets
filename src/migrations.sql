@@ -1,6 +1,6 @@
 
-CREATE DATABASE airlinetickets;
-USE airlinetickets;
+CREATE DATABASE airplane_tickets;
+USE airplane_tickets;
 
 CREATE TABLE passengers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
