@@ -2,11 +2,16 @@
 CREATE DATABASE airplane_tickets;
 USE airplane_tickets;
 
+CREATE TABLE Users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    phone_number VARCHAR(255),
+    password VARCHAR(255)
+);
+
 CREATE TABLE passengers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(255),
-    email VARCHAR(255),
-    phone_number VARCHAR(255),
     passport_number VARCHAR(255)
 );
 
@@ -25,16 +30,24 @@ CREATE TABLE passengers_in_reservations (
 
 CREATE TABLE airports (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    airport_name VARCHAR(255),
-    airport_location VARCHAR(255),
+    name VARCHAR(255),
+    location VARCHAR(255),
     code VARCHAR(255)
 );
 
+INSERT INTO airports (name, location, code) VALUES ('Sofia Airport', 'Sofia, Bulgaria', 'SOF');
+INSERT INTO airports (name, location, code) VALUES ('Munich Airport', 'Munich, Germany', 'MUC');
+INSERT INTO airports (name, location, code) VALUES ('Paris Charles de Gaulle Airport', 'Paris, France', 'CDG');
+
 CREATE TABLE airlines (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    airline_name VARCHAR(255),
-    airline_code VARCHAR(255)
+    name VARCHAR(255),
+    code VARCHAR(255)
 );
+
+INSERT INTO airlines (name, code) VALUES ('Ryanair', 'FR');
+INSERT INTO airlines (name, code) VALUES ('Wizz Air', 'W6');
+INSERT INTO airlines (name, code) VALUES ('Lufthansa', 'LH');
 
 CREATE TABLE flights (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -71,11 +84,13 @@ INSERT INTO payment_methods (method) VALUE ("Bank Transfer");
 
 CREATE TABLE transactions (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user BIGINT,
     amount DECIMAL(10, 2),
     transaction_time DATETIME,
     payment_method BIGINT,
     reservation BIGINT,
     FOREIGN KEY (reservation) REFERENCES reservations(id),
-    FOREIGN KEY (payment_method) REFERENCES payment_methods(id)
+    FOREIGN KEY (payment_method) REFERENCES payment_methods(id),
+    FOREIGN KEY (user) REFERENCES users(id)
 );
 

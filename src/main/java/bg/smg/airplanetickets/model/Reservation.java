@@ -11,12 +11,11 @@ public class Reservation {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name = "passengers_id")
     private List<Passenger> passengers;
 
     @Column(name = "date")
     private LocalDateTime date;
-
 }

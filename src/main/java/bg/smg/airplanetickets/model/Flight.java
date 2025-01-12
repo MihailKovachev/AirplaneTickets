@@ -10,7 +10,7 @@ public class Flight {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name = "number")
     private String number;

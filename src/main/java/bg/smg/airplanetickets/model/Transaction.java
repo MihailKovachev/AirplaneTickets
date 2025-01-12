@@ -10,7 +10,10 @@ public class Transaction {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
+
+    @Column(name = "user")
+    private User user;
 
     @Column(name = "amount")
     private float amount;
